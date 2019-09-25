@@ -34,6 +34,7 @@
 					<td>${usuario.sobrenome}</td>
 					<td>
 						<a href="/usuarios/edit/${usuario.id}">Editar</a>
+						<a href="/usuarios/excluir/${usuario.id}">Excluir</a>
 					</td>
 				</tr>
 			</c:forEach>
