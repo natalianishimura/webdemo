@@ -89,6 +89,30 @@ public class UsuariosController extends Controller {
 				.forward(getRequest(), getResponse());
 		}
 	}
+
+	@Override
+	public void delete(int id, Map<String, String> formData) throws IOException, ServletException {
+		
+		Usuario usuario = Usuario.GetById(id);
+		
+		
+		
+		if(isValid(formData)) {
+			usuario.setNome("");
+			usuario.setSobrenome("");
+			usuario.salvar();
+			
+			getResponse().sendRedirect("/usuarios?success=true");
+		}else {
+			Usuario usuarioInvalido = new Usuario(nome, sobrenome);
+			usuarioInvalido.setId(id);
+			getRequest().setAttribute("Usuario", usuario);
+			
+			getRequest()
+				.getRequestDispatcher("/WEB-INF/templates/usuarios/editar.jsp?success=false")
+				.forward(getRequest(), getResponse());
+		}
+	}
 	
 	private boolean isValid(Map<String, String> formData) throws UnsupportedEncodingException {
 		boolean isValid = true;
